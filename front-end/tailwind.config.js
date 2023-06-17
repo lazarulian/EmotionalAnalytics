@@ -1,18 +1,34 @@
-/** @type {import('tailwindcss').Config} */
+const colors = require("tailwindcss/colors");
+
 module.exports = {
-  content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  plugins: [require("daisyui")],
+  mode: "jit",
+  purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
+  darkMode: true, // or 'media' or 'class'
   theme: {
+    fontFamily: {
+      sans: ["Be Vietnam Pro", "Inter", "system-ui", "sans"],
+      monospace: ["DM Mono", "monospace"],
+    },
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      rotate: {
+        360: "360deg",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
+      animation: {
+        fadeInAndBounce: "fadeIn 3s ease-out",
+      },
+      willChange: {
+        projectCard: "border-color, opacity, transform",
       },
     },
   },
-  plugins: [],
-}
+  variants: {
+    extend: {},
+  },
+};
