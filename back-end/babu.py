@@ -11,7 +11,7 @@ async def websocket_request():
     json_data = request.get_json()
     text = json_data.get('text')
     result = await sdk.perform(text)
-    return result
+    return {"emotion": result}
 
 if __name__ == '__main__':
     app.run()
