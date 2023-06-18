@@ -4,7 +4,7 @@ from hume import HumeStreamClient
 from hume.models.config import LanguageConfig
 
 async def perform(sample):
-    client = HumeStreamClient("AygG98GqUg0X5GkjDtZ25gY38zokOPsT3aPjAmRXOfay8AcX")
+    client = HumeStreamClient("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")
     config = LanguageConfig("sentence")
     async with client.connect([config]) as socket:
         #make call
