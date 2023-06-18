@@ -1,5 +1,3 @@
-// pages/api/emotion.js
-
 export default async (req, res) => {
   const { text } = req.body;
 
