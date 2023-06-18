@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 function EmotionClassifier() {
   const [text, setText] = useState("");
-  const [emotions, setEmotions] = useState();
+  const [emotions, setEmotions] = useState(null);
 
   const classifyEmotion = async () => {
     const response = await fetch("/flask/love_babu", {
@@ -11,8 +11,7 @@ function EmotionClassifier() {
       body: JSON.stringify({ text }),
     });
     const data = await response.json();
-    console.log(data);
-    setEmotions(data);
+    setEmotions(data["emotion"]);
   };
 
   useEffect(() => {
@@ -47,7 +46,13 @@ function EmotionClassifier() {
           Classify Review
         </button>
       </form>
-      {/* <div>{emotions && <h1>Babu is feeling {emotions}</h1>}</div> */}
+      <div className="flex justify-center pt-5">
+        {emotions && (
+          <h1 className="text-3xl text-white ">
+            Babu is feeling a sense of {emotions}
+          </h1>
+        )}
+      </div>
     </div>
   );
 }
