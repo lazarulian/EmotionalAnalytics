@@ -7,6 +7,7 @@ async def perform(sample):
     client = HumeStreamClient("AygG98GqUg0X5GkjDtZ25gY38zokOPsT3aPjAmRXOfay8AcX")
     config = LanguageConfig("sentence")
     async with client.connect([config]) as socket:
+        #make call
         result = await socket.send_text(sample)
         emotions = result["language"]["predictions"][0]["emotions"]
         max_item = max(emotions, key=lambda x: x['score'])
