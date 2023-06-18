@@ -15,4 +15,3 @@ async def perform(sample):
         print(max_name)
         return max_name
 
-asyncio.run(perform("I am very very sad."))
