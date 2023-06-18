@@ -1,29 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function EmotionClassifier() {
   const [text, setText] = useState("");
-  const [emotions, setEmotions] = useState([]);
+  const [emotions, setEmotions] = useState();
 
   const classifyEmotion = async () => {
-    const response = await fetch("/api/emotion", {
+    const response = await fetch("/flask/love_babu", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text }),
     });
     const data = await response.json();
-    setEmotions(data.emotions);
+    console.log(data);
+    setEmotions(data);
   };
+
+  useEffect(() => {
+    console.log(emotions);
+  }, [emotions]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      classifyEmotion();
-    } catch (error) {}
+    classifyEmotion();
   };
 
   const handleInputChange = (e) => {
     setText(e.target.value);
-    console.log(JSON.stringify({ text }));
   };
 
   return (
@@ -45,13 +47,7 @@ function EmotionClassifier() {
           Classify Review
         </button>
       </form>
-      <ul>
-        {emotions.map((emotion, index) => (
-          <li key={index}>
-            {emotion.name}: {emotion.score}
-          </li>
-        ))}
-      </ul>
+      {/* <div>{emotions && <h1>Babu is feeling {emotions}</h1>}</div> */}
     </div>
   );
 }
